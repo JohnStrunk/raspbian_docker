@@ -1,6 +1,6 @@
 .PHONY: all
 
-BRANCH=$(shell git branch | grep '*' | awk '{ print $2 }')
+BRANCH=$(shell git branch | grep \\* | awk '{ print $$2 }')
 
 test:
 	echo $(BRANCH)
