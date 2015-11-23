@@ -1,11 +1,11 @@
-.PHONY: all
+.PHONY: all clean
 
-BRANCH=$(shell git branch | grep \\* | awk '{ print $$2 }')
-
-test:
-	echo $(BRANCH)
+SUITE=jessie
 
 all: rootfs.tar.xz
+
+clean:
+	rm -rf rootfs rootfs.tar.xz debootstrap.ts
 
 rootfs.tar.xz: debootstrap.ts
 	tar cvJf $@ -C rootfs .
@@ -18,8 +18,8 @@ debootstrap.ts:
 	    --variant=minbase \
 	    --keyring /usr/share/keyrings/raspbian-archive-keyring.gpg \
 	    --verbose \
-	    $(BRANCH) \
+	    $(SUITE) \
 	    rootfs \
 	    http://mirrordirector.raspbian.org/raspbian/
 	chroot rootfs apt-get clean
-	touch $@
+	date > $@
