@@ -1,6 +1,6 @@
 .PHONY: all clean
 
-SUITE=jessie
+SUITE=wheezy
 
 all: rootfs.tar.xz
 
